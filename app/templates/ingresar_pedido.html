@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block head_title %}Nuevo Pedido{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/dashboard" style="font-family: 'Arial', sans-serif; font-size: 24px;">Inicio del Sistema del Taller</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/nuevo_cliente" style="font-family: 'Arial', sans-serif;">Ingresar Pedido</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/base_de_datos" style="font-family: 'Arial', sans-serif;">Base de Datos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-auto" href="/logout" style="font-family: 'Arial', sans-serif;">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<h2>Paso #2: Ingresar Pedido</h2>
+<h4>Cliente: {{ cliente.nombre }} {{ cliente.apellido }}</h4>
+
+
+<form action="{{url_for('guardar_pedido',cliente_id=cliente.id)}}" method="POST">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Relleno</th>
+                <th>Extra </th>
+                <th>Sabores</th>
+                <th>Empaque</th> 
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>
+                    <select name="productos_id">
+                        {% for producto in productos %}
+                        <option value="{{ producto.id }}">{{ producto.nombre_producto }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="relleno_id">
+                        {% for relleno in rellenos %}
+                        <option value="{{ relleno.id }}">{{ relleno.nombre_relleno }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="extras_id">
+                        {% for extra in extras %}
+                        <option value="{{ extra.id }}">{{ extra.nombre_extra }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="sabores_id">
+                        {% for sabor in sabores %}
+                        <option value="{{ sabor.id }}">{{ sabor.nombre_sabores }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="empaques_id">
+                        {% for empaque in empaques %}
+                        <option value="{{ empaque.id }}">{{ empaque.nombre_empaque }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <h3>Características del Pedido:</h3>
+    <table class="table" style="width: 100%; height: auto;">
+        <thead>
+            <tr>
+                <th>Características</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <textarea class="form-control" name="caracteristicas" placeholder="Ingrese las características del pedido" style="width: 100%; height: 100%; word-wrap: break-word;"></textarea>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <label for="fecha_entrega">Fecha de Entrega:</label>
+        <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" required>
+    </div>
+
+    <div class="form-group">
+        <label for="fecha_ingreso">Fecha de Ingreso:</label>
+        <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" required>
+    </div>
+
+    <div class="form-group">
+        <label for="tipo_entrega">Tipo de Entrega:</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="recojo_tienda" name="tipo_entrega" value="recojo_tienda" required>
+            <label class="form-check-label" for="recojo_tienda">Recojo en Tienda</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="delivery" name="tipo_entrega" value="delivery" required>
+            <label class="form-check-label" for="delivery">Delivery</label>
+        </div>
+    </div>
+
+    <div id="direccion_delivery" style="display: none;">
+        <div class="form-group">
+            <label for="direccion_delivery">Dirección de Delivery:</label>
+            <input type="text" class="form-control" id="direccion_delivery" name="direccion_delivery">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Pedido</button>
+</form>
+
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

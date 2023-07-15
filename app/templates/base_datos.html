@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block head_title %}Base de Datos{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/dashboard" style="font-family: 'Arial', sans-serif; font-size: 24px;">Inicio del Sistema del Taller</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/nuevo_cliente" style="font-family: 'Arial', sans-serif;">Ingresar Pedido</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/base_de_datos" style="font-family: 'Arial', sans-serif;">Base de Datos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-auto" href="/logout" style="font-family: 'Arial', sans-serif;">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Mi Base de Datos</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>DNI</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Dirección</th>
+          <th>Producto</th>
+          <th>Relleno</th>
+          <th>Extra</th>
+          <th>Sabores</th>
+          <th>Empaque</th>
+          <th>Características</th>
+          <th>Fecha de Entrega</th>
+          <th>Fecha de Ingreso</th>
+          <th>Tipo de Entrega</th>
+        </tr>
+      </thead>
+    <tbody>
+      {% for dato in datos %}
+      <tr>
+          <td>{{ dato.nombre }}</td>
+          <td>{{ dato.apellido }}</td>
+          <td>{{ dato.dni }}</td>
+          <td>{{ dato.telefono }}</td>
+          <td>{{ dato.correo }}</td>
+          <td>{{ dato.direccion }}</td>
+          <td>{{ dato.nombre_producto }}</td>
+          <td>{{ dato.nombre_relleno }}</td>
+          <td>{{ dato.nombre_extra }}</td>
+          <td>{{ dato.nombre_sabores }}</td>
+          <td>{{ dato.nombre_empaque }}</td>
+          <td>{{ dato.caracteristicas }}</td>
+          <td>{{ dato.fecha_entrega }}</td>
+          <td>{{ dato.fecha_ingreso }}</td>
+          <td>{{ dato.tipo_de_entrega }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
+    {% endblock %}
